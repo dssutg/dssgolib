@@ -132,7 +132,7 @@ func IsFilenameWindowsReserved(name string) bool {
 // character cannot be part of filename on Windows.
 //
 // The invalid characters are:
-// '/', '\\', '<', '>', ':', '"', '|', '?', '*':
+// '/', '\\', '<', '>', ':', '"', '|', '?', '*'.
 func IsIllegalWindowsFilenameChar[T RuneOrByte](c T) bool {
 	switch c {
 	case '/', '\\', '<', '>', ':', '"', '|', '?', '*':

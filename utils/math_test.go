@@ -29,8 +29,8 @@ func TestDigitCountUint64(t *testing.T) {
 		}
 	}
 
-	for i := uint64(0); i <= 65536; i++ {
-		assertCount(i)
+	for i := range math.MaxUint16 + 1 {
+		assertCount(uint64(i))
 	}
 
 	assertCount(1e4)

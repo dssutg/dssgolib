@@ -103,7 +103,7 @@ func BenchmarkBCDToStringBE(b *testing.B) {
 	in := make([]byte, 20)
 	// prepare a valid BCD byte slice for BE: 0..19 -> bytes 0x01 0x23 ...
 	for i := range 10 {
-		in[i] = byte(((2*i)&0xF)<<4 | ((2*i + 1) & 0xF))
+		in[i] = byte(((2*i)&0xF)<<4 | ((2*i + 1) & 0xF)) //nolint:gosec
 	}
 
 	for b.Loop() {
@@ -115,7 +115,7 @@ func BenchmarkBCDToStringLE(b *testing.B) {
 	in := make([]byte, 20)
 	for i := range 10 {
 		// LE expects low nibble first in storage; create equivalent pattern
-		in[i] = byte(((2*i+1)&0xF)<<4 | ((2 * i) & 0xF))
+		in[i] = byte(((2*i+1)&0xF)<<4 | ((2 * i) & 0xF)) //nolint:gosec
 	}
 
 	for b.Loop() {

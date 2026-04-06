@@ -70,13 +70,13 @@ func (s *FlagSet64) Union(t *FlagSet64) { *s |= *t }
 // Sub sets s to the difference of s and t.
 func (s *FlagSet8) Sub(t *FlagSet8) {
 	x, _ := bits.Sub32(uint32(*s), uint32(*t), 0)
-	*s = FlagSet8(x)
+	*s = FlagSet8(x) //nolint:gosec
 }
 
 // Sub sets s to the difference of s and t.
 func (s *FlagSet16) Sub(t *FlagSet16) {
 	x, _ := bits.Sub32(uint32(*s), uint32(*t), 0)
-	*s = FlagSet16(x)
+	*s = FlagSet16(x) //nolint:gosec
 }
 
 // Sub sets s to the difference of s and t.

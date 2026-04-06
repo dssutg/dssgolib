@@ -66,7 +66,7 @@ func genIsKeyword() {
 		log.Fatal(err)
 	}
 
-	if err := os.WriteFile("is_keyword_gen.go", formatted, 0o644); err != nil {
+	if err := os.WriteFile("is_keyword_gen.go", formatted, 0o600); err != nil {
 		log.Fatal(err)
 	}
 }

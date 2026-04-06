@@ -107,14 +107,12 @@ func ParseDecimalInt32(s string) (int32, error) {
 
 // ParseDecimalUint64 is a type-safe wrapper around strconv.ParseUint(s, 10, 64).
 func ParseDecimalUint64(s string) (uint64, error) {
-	x, err := strconv.ParseUint(s, 10, 64)
-	return uint64(x), err
+	return strconv.ParseUint(s, 10, 64)
 }
 
 // ParseDecimalInt64 is a type-safe wrapper around strconv.ParseInt(s, 10, 64).
 func ParseDecimalInt64(s string) (int64, error) {
-	x, err := strconv.ParseInt(s, 10, 64)
-	return int64(x), err
+	return strconv.ParseInt(s, 10, 64)
 }
 
 // ParseFloat32 is a type-safe wrapper around strconv.ParseFloat(s, 32).

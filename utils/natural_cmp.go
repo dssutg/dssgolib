@@ -75,7 +75,7 @@ func NaturalCmp(a, b string) int {
 			}
 
 			// Same length -> lexicographic compare of digit runs.
-			for i := 0; i < aDigitsLen; i++ {
+			for i := range aDigitsLen {
 				ac := a[aiDigitsStart+i]
 				bc := b[biDigitsStart+i]
 				if ac != bc {

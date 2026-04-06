@@ -18,9 +18,13 @@ func Make[T any](maker func() *T) Pool[T] {
 	}
 }
 
-// New returns an object from the pool,
+// New returns an object from the pool.
 func (p *Pool[T]) New() *T {
-	return p.pool.Get().(*T)
+	value, ok := p.pool.Get().(*T)
+	if !ok {
+		panic("unreachable")
+	}
+	return value
 }
 
 // Free zeroes the object, then gets it back to the pool.

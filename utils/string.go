@@ -153,7 +153,7 @@ func UTF8ToWin1251Soft(s string) []byte {
 
 		// Fast path for ASCII.
 		if c <= 127 {
-			b.WriteByte(byte(c))
+			b.WriteByte(byte(c)) //nolint:gosec
 			continue
 		}
 

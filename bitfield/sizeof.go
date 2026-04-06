@@ -239,7 +239,7 @@ func doSizeof(rv reflect.Value) (int, error) {
 		reflect.Float32,
 		reflect.Float64:
 		// For basic types, get their size directly.
-		byteCount += int(rv.Type().Size())
+		byteCount += int(rv.Type().Size()) //nolint:gosec
 	default:
 		return 0, ErrInvalidKind
 	}

@@ -26,7 +26,11 @@ func (m *Map[K, V]) Load(key K) (value V, ok bool) {
 		var zero V
 		return zero, false
 	}
-	return v.(V), true
+	value, assertOk := v.(V)
+	if !assertOk {
+		panic("unreachable")
+	}
+	return value, true
 }
 
 // Has reports whether the key exists in the map.
@@ -49,7 +53,11 @@ func (m *Map[K, V]) Get(key K) V {
 // The loaded result is true if the value was loaded, false if stored.
 func (m *Map[K, V]) LoadOrStore(key K, value V) (actual V, loaded bool) {
 	a, loaded := m.m.LoadOrStore(key, value)
-	return a.(V), loaded
+	value, assertOk := a.(V)
+	if !assertOk {
+		panic("unreachable")
+	}
+	return value, loaded
 }
 
 // LoadAndDelete deletes the value for a key, returning the previous value if any.
@@ -59,7 +67,11 @@ func (m *Map[K, V]) LoadAndDelete(key K) (value V, loaded bool) {
 		var zero V
 		return zero, false
 	}
-	return v.(V), true
+	value, assertOk := v.(V)
+	if !assertOk {
+		panic("unreachable")
+	}
+	return value, true
 }
 
 // Delete deletes the value for a key.
@@ -67,10 +79,10 @@ func (m *Map[K, V]) Delete(key K) {
 	m.m.Delete(key)
 }
 
-// CompareAndSwap swaps the value for key from old to new if the current value equals old.
-// Note: old must be comparable (runtime compare done by sync.Map).
-func (m *Map[K, V]) CompareAndSwap(key K, old, new V) bool {
-	return m.m.CompareAndSwap(key, old, new)
+// CompareAndSwap swaps the value for key from oldValue to newValue if the current value equals oldValue.
+// Note: oldValue must be comparable (runtime compare done by sync.Map).
+func (m *Map[K, V]) CompareAndSwap(key K, oldValue, newValue V) bool {
+	return m.m.CompareAndSwap(key, oldValue, newValue)
 }
 
 // CompareAndDelete deletes the entry for key if its value equals old.
@@ -85,7 +97,11 @@ func (m *Map[K, V]) Swap(key K, value V) (previous V, loaded bool) {
 		var zero V
 		return zero, false
 	}
-	return p.(V), true
+	value, assertOk := p.(V)
+	if !assertOk {
+		panic("unreachable")
+	}
+	return value, true
 }
 
 // Range calls fn for each key and value present in the map.
@@ -95,7 +111,12 @@ func (m *Map[K, V]) Range(fn func(key K, value V) bool) {
 		return
 	}
 	m.m.Range(func(k, v any) bool {
-		return fn(k.(K), v.(V))
+		key, keyOk := k.(K)
+		value, valueOk := v.(V)
+		if !keyOk || !valueOk {
+			panic("unreachable")
+		}
+		return fn(key, value)
 	})
 }
 

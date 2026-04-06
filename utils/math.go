@@ -223,8 +223,8 @@ func Det3x3[T Float](a [3][3]T) T {
 		a[2][2]*a[1][0]*a[0][1]
 }
 
-func MinNumValue[T Number](v T) T {
-	switch v := any(v).(type) {
+func MinNumValue[T Number](value T) T {
+	switch v := any(value).(type) { //nolint:ineffassign
 	case int:
 		v = math.MinInt
 		return T(v)
@@ -254,7 +254,7 @@ func MinNumValue[T Number](v T) T {
 }
 
 func MaxNumValue[T Number](v T) T {
-	switch v := any(v).(type) {
+	switch v := any(v).(type) { //nolint:ineffassign
 	case int:
 		v = math.MaxInt
 		return T(v)
@@ -515,7 +515,7 @@ func Pow10Uint64(pow int) uint64 {
 	return Pow10TabUint64[pow]
 }
 
-// bitLenToNearPow10Tab[bits.Len64(i)] = max(1, decimalDigitCount(i) - 1) for uint64
+// bitLenToNearPow10Tab[bits.Len64(i)] = max(1, decimalDigitCount(i) - 1) for uint64.
 var bit64LenToNearPow10Tab = [64 + 1]byte{
 	1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5,
 	5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10,
@@ -729,7 +729,7 @@ func ClampPort(port int64) uint16 {
 // BitSizeOf returns the bit size of the given value.
 func BitSizeOf[T any](x T) int {
 	const bitsPerByte = 8
-	return int(unsafe.Sizeof(x)) * bitsPerByte
+	return int(unsafe.Sizeof(x)) * bitsPerByte //nolint:gosec
 }
 
 // NearlyEqual reports whether a nearly equals b.

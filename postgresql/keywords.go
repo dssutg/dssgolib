@@ -13,7 +13,7 @@ var Keywords = internal.Keywords
 // KeywordSet is a set of lowercase PostgreSQL keywords.
 var KeywordSet = make(map[string]struct{}, len(Keywords))
 
-func init() {
+func init() { //nolint:gochecknoinits
 	for _, word := range Keywords {
 		KeywordSet[word] = struct{}{}
 	}

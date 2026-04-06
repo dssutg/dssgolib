@@ -3,6 +3,8 @@ package utils
 import "testing"
 
 func TestWriteNibbleBE(t *testing.T) {
+	t.Parallel()
+
 	var buf [4]byte
 
 	b := MakeNibbleArrayBuilder(buf[:])
@@ -19,6 +21,8 @@ func TestWriteNibbleBE(t *testing.T) {
 }
 
 func TestWriteNibbleLE(t *testing.T) {
+	t.Parallel()
+
 	var buf [4]byte
 
 	b := MakeNibbleArrayBuilder(buf[:])

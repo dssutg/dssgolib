@@ -1,6 +1,7 @@
 package ring
 
 import (
+	"slices"
 	"testing"
 )
 
@@ -30,7 +31,7 @@ func TestAddAndGetAll(t *testing.T) {
 	got := buf.GetAll()
 	want := []int{1, 2, 3}
 
-	if !equal(got, want) {
+	if !slices.Equal(got, want) {
 		t.Errorf("buf.GetAll() = %v, want %v", got, want)
 	}
 }
@@ -47,7 +48,7 @@ func TestAddBeyondCapacity(t *testing.T) {
 	got := buf.GetAll()
 	want := []int{2, 3, 4}
 
-	if !equal(got, want) {
+	if !slices.Equal(got, want) {
 		t.Errorf("buf.GetAll() = %v, want %v", got, want)
 	}
 }
@@ -64,7 +65,7 @@ func TestWrapAround(t *testing.T) {
 	got := buf.GetAll()
 	want := []int{3, 4, 5}
 
-	if !equal(got, want) {
+	if !slices.Equal(got, want) {
 		t.Errorf("buf.GetAll() = %v, want %v", got, want)
 	}
 }
@@ -81,7 +82,7 @@ func TestWrapAround2(t *testing.T) {
 	got := buf.GetAll()
 	want := []int{10, 11, 12}
 
-	if !equal(got, want) {
+	if !slices.Equal(got, want) {
 		t.Errorf("buf.GetAll() = %v, want %v", got, want)
 	}
 }
@@ -94,21 +95,7 @@ func TestGetAllWhenEmpty(t *testing.T) {
 	got := buf.GetAll()
 	want := []int{}
 
-	if !equal(got, want) {
+	if !slices.Equal(got, want) {
 		t.Errorf("got %v, want %v", got, want)
 	}
-}
-
-func equal(a, b []int) bool {
-	if len(a) != len(b) {
-		return false
-	}
-
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-
-	return true
 }

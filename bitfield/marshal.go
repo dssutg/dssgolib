@@ -204,7 +204,7 @@ func doMarshal(rv reflect.Value) ([]byte, error) {
 
 						// Extract the bits to write from fieldUint.
 						// (They come from the lower portion.)
-						part := byte(fieldUint & ((1 << toWrite) - 1))
+						part := byte(fieldUint & ((1 << toWrite) - 1)) //nolint:gosec
 						// Put them into bitBuffer at the proper offset.
 						bitBuffer |= part << bitCount
 

@@ -201,7 +201,7 @@ func (b *FileBuffer) ReadLastN(limit int) (listBytes []byte, nextIndex int, err 
 
 	if count == 0 {
 		// No elements to read, return an empty slice.
-		return
+		return listBytes, nextIndex, err
 	}
 
 	// Determine the wrapped index range for read.
@@ -218,7 +218,7 @@ func (b *FileBuffer) ReadLastN(limit int) (listBytes []byte, nextIndex int, err 
 		if _, err = b.file.ReadAt(listBytes, startOff); err != nil {
 			listBytes = nil
 		}
-		return
+		return listBytes, nextIndex, err
 	}
 
 	// The index range is wrapped, so have to read in two chunks.
@@ -228,13 +228,13 @@ func (b *FileBuffer) ReadLastN(limit int) (listBytes []byte, nextIndex int, err 
 	startOff := int64(startIdx*b.elemSize + b.bias)
 	if _, err = b.file.ReadAt(listBytes[:startSize], startOff); err != nil {
 		listBytes = nil
-		return
+		return listBytes, nextIndex, err
 	}
 	endOff := int64(0*b.elemSize + b.bias)
 	if _, err = b.file.ReadAt(listBytes[startSize:], endOff); err != nil {
 		listBytes = nil
-		return
+		return listBytes, nextIndex, err
 	}
 
-	return
+	return listBytes, nextIndex, err
 }

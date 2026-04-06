@@ -7,6 +7,8 @@ import (
 )
 
 func TestSqueezeSlice(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		input       []string
 		wantLen     int

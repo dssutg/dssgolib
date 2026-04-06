@@ -68,10 +68,10 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 		case 'F': // full date; like %+4Y-%m-%d
 			m := int(t.Month())
 			d := t.Day()
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
-			d1 := byte(d/10) + '0'
-			d2 := byte(d%10) + '0'
+			m1 := byte(m/10) + '0' //nolint:gosec
+			m2 := byte(m%10) + '0' //nolint:gosec
+			d1 := byte(d/10) + '0' //nolint:gosec
+			d2 := byte(d%10) + '0' //nolint:gosec
 			b = strftimeAppendPadInt4(b, t.Year(), '0')
 			b = append(b, '-', m1, m2, '-', d1, d2)
 		case 'D', 'x': // date; same as %m/%d/%y
@@ -80,12 +80,12 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 			y := t.Year()
 			m := int(t.Month())
 			d := t.Day()
-			y1 := byte(y/10%10) + '0'
-			y2 := byte(y%10) + '0'
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
-			d1 := byte(d/10) + '0'
-			d2 := byte(d%10) + '0'
+			y1 := byte(y/10%10) + '0' //nolint:gosec
+			y2 := byte(y%10) + '0'    //nolint:gosec
+			m1 := byte(m/10) + '0'    //nolint:gosec
+			m2 := byte(m%10) + '0'    //nolint:gosec
+			d1 := byte(d/10) + '0'    //nolint:gosec
+			d2 := byte(d%10) + '0'    //nolint:gosec
 			b = append(b, m1, m2, '/', d1, d2, '/', y1, y2)
 		case 'T', 'X': // time; same as %H:%M:%S
 			// %X is locale's time representation (e.g., 23:13:48)
@@ -93,20 +93,20 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 			h := t.Hour()
 			m := t.Minute()
 			s := t.Second()
-			h1 := byte(h/10) + '0'
-			h2 := byte(h%10) + '0'
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
-			s1 := byte(s/10) + '0'
-			s2 := byte(s%10) + '0'
+			h1 := byte(h/10) + '0' //nolint:gosec
+			h2 := byte(h%10) + '0' //nolint:gosec
+			m1 := byte(m/10) + '0' //nolint:gosec
+			m2 := byte(m%10) + '0' //nolint:gosec
+			s1 := byte(s/10) + '0' //nolint:gosec
+			s2 := byte(s%10) + '0' //nolint:gosec
 			b = append(b, h1, h2, ':', m1, m2, ':', s1, s2)
 		case 'R': // 24-hour hour and minute; same as %H:%M
 			h := t.Hour()
 			m := t.Minute()
-			h1 := byte(h/10) + '0'
-			h2 := byte(h%10) + '0'
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
+			h1 := byte(h/10) + '0' //nolint:gosec
+			h2 := byte(h%10) + '0' //nolint:gosec
+			m1 := byte(m/10) + '0' //nolint:gosec
+			m2 := byte(m%10) + '0' //nolint:gosec
 			b = append(b, h1, h2, ':', m1, m2)
 		case 'r': // locale's 12-hour clock time (e.g., 11:11:04 PM)
 			h := t.Hour()
@@ -122,10 +122,10 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 			}
 			h1 := byte(h/10) + '0'
 			h2 := byte(h%10) + '0'
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
-			s1 := byte(s/10) + '0'
-			s2 := byte(s%10) + '0'
+			m1 := byte(m/10) + '0' //nolint:gosec
+			m2 := byte(m%10) + '0' //nolint:gosec
+			s1 := byte(s/10) + '0' //nolint:gosec
+			s2 := byte(s%10) + '0' //nolint:gosec
 			b = append(b, h1, h2, ':', m1, m2, ':', s1, s2, ' ', p, 'm')
 		case 'c': // locale's date and time (e.g., Thu Mar  3 23:05:25 2005)
 			d := t.Day()
@@ -136,26 +136,26 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 			b = append(b, ' ')
 			b = append(b, t.Month().String()[:3]...)
 			b = append(b, ' ')
-			d2 := byte(d%10) + '0'
+			d2 := byte(d%10) + '0' //nolint:gosec
 			if d >= 10 {
-				d1 := byte(d/10) + '0'
+				d1 := byte(d/10) + '0' //nolint:gosec
 				b = append(b, d1, d2, ' ')
 			} else {
 				b = append(b, ' ', d2, ' ')
 			}
-			h1 := byte(h/10) + '0'
-			h2 := byte(h%10) + '0'
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
-			s1 := byte(s/10) + '0'
-			s2 := byte(s%10) + '0'
+			h1 := byte(h/10) + '0' //nolint:gosec
+			h2 := byte(h%10) + '0' //nolint:gosec
+			m1 := byte(m/10) + '0' //nolint:gosec
+			m2 := byte(m%10) + '0' //nolint:gosec
+			s1 := byte(s/10) + '0' //nolint:gosec
+			s2 := byte(s%10) + '0' //nolint:gosec
 			b = append(b, h1, h2, ':', m1, m2, ':', s1, s2, ' ')
 			b = strftimeAppendPadInt4(b, t.Year(), '0')
 		case 'k': // hour, space padded (0..23); same as %_H
 			h := t.Hour()
-			h2 := byte(h%10) + '0'
+			h2 := byte(h%10) + '0' //nolint:gosec
 			if h >= 10 {
-				h1 := byte(h/10) + '0'
+				h1 := byte(h/10) + '0' //nolint:gosec
 				b = append(b, h1, h2)
 			} else {
 				b = append(b, ' ', h2)
@@ -177,9 +177,9 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 			}
 		case 'e': // day of month, space padded; same as %_d
 			d := t.Day()
-			d2 := byte(d%10) + '0'
+			d2 := byte(d%10) + '0' //nolint:gosec
 			if d >= 10 {
-				d1 := byte(d/10) + '0'
+				d1 := byte(d/10) + '0' //nolint:gosec
 				b = append(b, d1, d2)
 			} else {
 				b = append(b, ' ', d2)
@@ -201,7 +201,7 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 		case 'C': // century; like %Y, except omit last two digits (e.g., 20)
 			b = strftmeAppendPadInt2(b, t.Year()/100, padByte)
 		case 'q': // quarter of year (1..4)
-			b = append(b, byte((int(t.Month())-1)/3+1)+'0')
+			b = append(b, byte((int(t.Month())-1)/3+1)+'0') //nolint:gosec
 		case 'd': // day of month (e.g., 01)
 			b = strftmeAppendPadInt2(b, t.Day(), padByte)
 		case 'j': // day of year (001..366)
@@ -209,7 +209,7 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 		case 'm': // month (01..12)
 			b = strftmeAppendPadInt2(b, int(t.Month()), padByte)
 		case 'w': // day of week (0..6); 0 is Sunday
-			b = append(b, byte(t.Weekday())+'0')
+			b = append(b, byte(t.Weekday())+'0') //nolint:gosec
 		case 'V': // ISO week number, with Monday as first day of week (01..53)
 			_, week := t.ISOWeek()
 			b = strftmeAppendPadInt2(b, week, padByte)
@@ -249,7 +249,7 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 		case 'N': // nanoseconds (000000000..999999999)
 			b = strconv.AppendInt(b, t.UnixNano(), 10)
 		case 'u': // day of week (1..7); 1 is Monday
-			wday := byte(t.Weekday())
+			wday := byte(t.Weekday()) //nolint:gosec
 			if wday == 0 {
 				wday = 7
 			}
@@ -278,10 +278,10 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 			}
 			h := offset / 3600
 			m := (offset % 3600) / 60
-			h1 := byte(h/10) + '0'
-			h2 := byte(h%10) + '0'
-			m1 := byte(m/10) + '0'
-			m2 := byte(m%10) + '0'
+			h1 := byte(h/10) + '0' //nolint:gosec
+			h2 := byte(h%10) + '0' //nolint:gosec
+			m1 := byte(m/10) + '0' //nolint:gosec
+			m2 := byte(m%10) + '0' //nolint:gosec
 			b = append(b, sign, h1, h2, m1, m2)
 		case ':':
 			n := len(format)
@@ -300,18 +300,18 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 					h := m / 60
 					s %= 60
 					m %= 60
-					h1 := byte(h/10) + '0'
-					h2 := byte(h%10) + '0'
+					h1 := byte(h/10) + '0' //nolint:gosec
+					h2 := byte(h%10) + '0' //nolint:gosec
 					switch {
 					case s != 0: // if non-zero seconds, minutes surely appended as well
-						m1 := byte(m/10) + '0'
-						m2 := byte(m%10) + '0'
-						s1 := byte(s/10) + '0'
-						s2 := byte(s%10) + '0'
+						m1 := byte(m/10) + '0' //nolint:gosec
+						m2 := byte(m%10) + '0' //nolint:gosec
+						s1 := byte(s/10) + '0' //nolint:gosec
+						s2 := byte(s%10) + '0' //nolint:gosec
 						b = append(b, sign, h1, h2, ':', m1, m2, ':', s1, s2)
 					case m != 0: // if zero seconds, then only append minutes if non-zero
-						m1 := byte(m/10) + '0'
-						m2 := byte(m%10) + '0'
+						m1 := byte(m/10) + '0' //nolint:gosec
+						m2 := byte(m%10) + '0' //nolint:gosec
 						b = append(b, sign, h1, h2, ':', m1, m2)
 					default:
 						b = append(b, sign, h1, h2)
@@ -333,12 +333,12 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 					h := m / 60
 					s %= 60
 					m %= 60
-					h1 := byte(h/10) + '0'
-					h2 := byte(h%10) + '0'
-					m1 := byte(m/10) + '0'
-					m2 := byte(m%10) + '0'
-					s1 := byte(s/10) + '0'
-					s2 := byte(s%10) + '0'
+					h1 := byte(h/10) + '0' //nolint:gosec
+					h2 := byte(h%10) + '0' //nolint:gosec
+					m1 := byte(m/10) + '0' //nolint:gosec
+					m2 := byte(m%10) + '0' //nolint:gosec
+					s1 := byte(s/10) + '0' //nolint:gosec
+					s2 := byte(s%10) + '0' //nolint:gosec
 					b = append(b, sign, h1, h2, ':', m1, m2, ':', s1, s2)
 					format = format[3:] // consume ::z
 					continue            // skip consuming any byte because we've already done it
@@ -354,10 +354,10 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 					}
 					h := offset / 3600
 					m := (offset % 3600) / 60
-					h1 := byte(h/10) + '0'
-					h2 := byte(h%10) + '0'
-					m1 := byte(m/10) + '0'
-					m2 := byte(m%10) + '0'
+					h1 := byte(h/10) + '0' //nolint:gosec
+					h2 := byte(h%10) + '0' //nolint:gosec
+					m1 := byte(m/10) + '0' //nolint:gosec
+					m2 := byte(m%10) + '0' //nolint:gosec
 					b = append(b, sign, h1, h2, ':', m1, m2)
 					format = format[2:] // consume :z
 					continue            // skip consuming any byte because we've already done it
@@ -381,21 +381,21 @@ func AppendStrftime(b []byte, format string, t time.Time) []byte {
 }
 
 func strftmeAppendPadInt2(b []byte, x int, padByte byte) []byte {
-	x2 := byte(x%10) + '0'
+	x2 := byte(x%10) + '0' //nolint:gosec
 	switch padByte {
 	case '0':
-		x1 := byte(x/10) + '0'
+		x1 := byte(x/10) + '0' //nolint:gosec
 		b = append(b, x1, x2)
 	case '-':
 		if x >= 10 {
-			x1 := byte(x/10) + '0'
+			x1 := byte(x/10) + '0' //nolint:gosec
 			b = append(b, x1, x2)
 		} else {
 			b = append(b, x2)
 		}
 	case '_':
 		if x >= 10 {
-			x1 := byte(x/10) + '0'
+			x1 := byte(x/10) + '0' //nolint:gosec
 			b = append(b, x1, x2)
 		} else {
 			b = append(b, ' ', x2)
@@ -405,11 +405,11 @@ func strftmeAppendPadInt2(b []byte, x int, padByte byte) []byte {
 }
 
 func strftimeAppendPadInt3(b []byte, x int, padByte byte) []byte {
-	x3 := byte(x%10) + '0'
+	x3 := byte(x%10) + '0' //nolint:gosec
 	switch padByte {
 	case '0':
-		x1 := byte(x/100%10) + '0'
-		x2 := byte(x/10%10) + '0'
+		x1 := byte(x/100%10) + '0' //nolint:gosec
+		x2 := byte(x/10%10) + '0'  //nolint:gosec
 		b = append(b, x1, x2, x3)
 	case '-':
 		switch {
@@ -444,12 +444,12 @@ func strftimeAppendPadInt4(b []byte, x int, padByte byte) []byte {
 		b = strconv.AppendInt(b, int64(x), 10)
 		return b
 	}
-	x4 := byte(x%10) + '0'
+	x4 := byte(x%10) + '0' //nolint:gosec
 	switch padByte {
 	case '0':
-		x1 := byte(x/1000) + '0'
-		x2 := byte(x/100%10) + '0'
-		x3 := byte(x/10%10) + '0'
+		x1 := byte(x/1000) + '0'   //nolint:gosec
+		x2 := byte(x/100%10) + '0' //nolint:gosec
+		x3 := byte(x/10%10) + '0'  //nolint:gosec
 		b = append(b, x1, x2, x3, x4)
 	case '-':
 		switch {

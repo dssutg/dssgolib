@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type RelDateLocale interface {
+type RelDateLocale interface { //nolint:interfacebloat
 	DaysAgo(days int64) string
 	Yesterday() string
 	HoursAgo(hours int64) string

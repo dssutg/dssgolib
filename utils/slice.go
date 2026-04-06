@@ -198,7 +198,7 @@ func FindOneMissingInt(v []int) (missing int, ok bool) {
 	// Binary search the missing slot.
 	lo, hi := 0, len(v)-1
 	for lo <= hi {
-		mid := int(uint(lo+hi) >> 1) // avoid overflow when computing mid
+		mid := int(uint(lo+hi) >> 1) //nolint:gosec // avoid overflow when computing mid
 		want := v[0] + mid           // wanted value at index mid if sequence were consecutive from a[0]
 		switch {
 		case v[mid] == want:

@@ -33,10 +33,10 @@ func (s *Set[T]) Clone() Set[T] {
 }
 
 // MakeWithCap is a convenience function that creates a new Set
-// instance (by value) with its underlying map of the given cap properly
+// instance (by value) with its underlying map of the given capacity properly
 // initialized.
-func MakeWithCap[T comparable](cap int) Set[T] {
-	return Set[T]{elements: make(map[T]struct{}, cap)}
+func MakeWithCap[T comparable](capacity int) Set[T] {
+	return Set[T]{elements: make(map[T]struct{}, capacity)}
 }
 
 // New creates and returns a pointer to a new Set instance

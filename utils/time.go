@@ -206,13 +206,13 @@ func DaysBeforeMonth(month time.Month, year int) int {
 // MonthStartWeekday returns the weekday of the first day in this month.
 // This function along with [DaysInMonth] is a must-have to build
 // a month calendar.
-func MonthStartWeekday(month time.Month, year int) time.Weekday {
-	return time.Date(year, month, 1, 0, 0, 0, 0, time.Local).Weekday()
+func MonthStartWeekday(month time.Month, year int, loc *time.Location) time.Weekday {
+	return time.Date(year, month, 1, 0, 0, 0, 0, loc).Weekday()
 }
 
 // PrintStandardMonthCalendar prints the standard calendar
 // starting with Sunday.
-func PrintStandardMonthCalendar(w io.Writer, month time.Month, year int) {
+func PrintStandardMonthCalendar(w io.Writer, month time.Month, year int, loc *time.Location) {
 	header1Len := len(month.String()) + 1 + DigitCountUint64(AbsToUint64(int64(year)))
 	if year < 0 {
 		header1Len++ // for minus sign
@@ -229,7 +229,7 @@ func PrintStandardMonthCalendar(w io.Writer, month time.Month, year int) {
 	fmt.Fprintln(w, header2)
 
 	// Compute calendar properties.
-	startDay := int(MonthStartWeekday(month, year))
+	startDay := int(MonthStartWeekday(month, year, loc))
 	days := DaysInMonth(month, year)
 
 	// Print space to skip previous month's weekdays.

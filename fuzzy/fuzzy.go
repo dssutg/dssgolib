@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-// FuzzySearch performs a fuzzy search over array using provided helpers.
+// Search performs a fuzzy search over array using provided helpers.
 // - query: the search string.
 // - array: slice of items to search.
 // - cleanString: normalizes strings (e.g., lowercasing, removing diacritics).
 // - getItemName: returns the searchable name for each item.
 // Returns a slice of matching items ordered by descending match quality.
-func FuzzySearch[T any](
+func Search[T any](
 	query string,
 	array []T,
 	cleanString func(string) string,
